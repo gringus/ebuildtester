@@ -152,6 +152,9 @@ class Docker:
     def _create_container(self, docker_image, portdir, overlays):
         """Create new container."""
 
+        if not os.path.isdir(portdir):
+            raise Exception(f"Portage dir does not exists: {portdir}")
+
         cache_dir = user_cache_dir("ebuildtester")
         os.makedirs(cache_dir, exist_ok=True)
 
